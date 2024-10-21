@@ -8,7 +8,7 @@ export const Header = () => {
                 <div className="md:col-span-3">
                     <a
                         className="flex space-x-2 rounded-xl text-xl font-semibold focus:opacity-80 focus:outline-none"
-                        href="#"
+                        href="/"
                         aria-label="ReUse Pass"
                     >
                         <Image
