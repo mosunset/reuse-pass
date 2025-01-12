@@ -1,0 +1,8 @@
+/src/components/ui/
+*.png
+*.webp
+*.jpg
+*.txt
+*.xml
+*.svg
+/public/__/

@@ -1,3 +1,80 @@
 {
-  "extends": ["next/core-web-vitals", "next/typescript"]
+    "extends": ["next/core-web-vitals", "next/typescript"], // Next.js向けのESLint設定を拡張
+    "ignorePatterns": ["/src/components/ui/"],
+    "rules": {
+        "import/order": [
+            // インポート順序を整理するルール
+            "warn",
+            {
+                "groups": [
+                    "builtin",
+                    "external",
+                    "parent",
+                    "sibling",
+                    "index",
+                    "object",
+                    "type"
+                ], // インポートのグループ分け
+                "pathGroups": [
+                    {
+                        "pattern": "{react,react-dom/**,react-router-dom}", // React関連のライブラリをbuiltinグループに
+                        "group": "builtin",
+                        "position": "before" // 他のbuiltinインポートの前に配置
+                    },
+                    {
+                        "pattern": "@/**", // 「@/」から始まるパス（エイリアス）をparentグループに
+                        "group": "parent",
+                        "position": "before" // parentグループの前に配置
+                    }
+                ],
+                "pathGroupsExcludedImportTypes": ["builtin"], // builtinグループのインポートはパスグループに含まない
+                "alphabetize": {
+                    "order": "asc" // インポートをアルファベット順に整理
+                },
+                "newlines-between": "never" // インポートの間に常に空行を挿入
+            }
+        ],
+        "curly": "error", // if文などで波括弧{}を必須にする
+        "eqeqeq": ["error", "always"], // 厳密な比較(===, !==)を強制
+        "no-console": [
+            "warn",
+            {
+                "allow": ["warn", "error"]
+            }
+        ], // console.logを警告し、console.warnとconsole.errorは許可
+        "no-multiple-empty-lines": "error", // 複数の空行をエラーとして扱う
+        "no-restricted-globals": [
+            "error",
+            {
+                "name": "isNaN",
+                "message": "Use Number.isNaN" // グローバルのisNaNの代わりにNumber.isNaNを使用
+            }
+        ],
+        "no-shadow": "warn", // 外部スコープの変数と同名の変数宣言を警告
+        // "no-unused-vars": "warn", // 未使用の変数を警告 // NOTE: typescript側で制御
+        "prefer-const": "warn", // 再代入しない変数はconstを推奨
+        "react-hooks/exhaustive-deps": "warn", // useEffectの依存配列を正確に指定
+        // "react/jsx-boolean-value": ["warn", "always"], // JSXでboolean値を常に明示
+        // "react/react-in-jsx-scope": "error", // JSX使用時にReactがスコープ内にあることを確認
+        "import/no-unresolved": "error", // 解決されていないインポートをチェック
+        "import/first": "error", // すべてのインポート文がファイル内の他の文の前にあることを強制
+        "import/newline-after-import": ["error", { "count": 1 }], // インポート文の後に改行を強制
+        "no-duplicate-imports": "error", // 同じモジュールからの重複インポートを禁止
+        "consistent-return": "warn", // 関数内のすべてのreturn文が値を指定するか、まったく指定しないことを要求
+        "prefer-template": "warn", // 文字列の連結の代わりにテンプレートリテラルの使用を推奨
+
+        // NOTE: typescript関連
+        // NOTE: パッケージがインストールされていないものもある
+        // NOTE: [参考URL](https://zenn.dev/sumiren/articles/97e19ebcce8197)
+        // NOTE: npm install --save-dev eslint @typescript-eslint/parser @typescript-eslint/eslint-plugin eslint-config-prettier prettier
+        "@typescript-eslint/no-explicit-any": "warn", // anyの使用を警告
+        "@typescript-eslint/no-unused-vars": "warn" // 未使用の変数を警告
+        // "@typescript-eslint/explicit-module-boundary-types": "warn" // 関数の戻り値の型を明示
+        // "@typescript-eslint/no-unused-expressions": "error" // 未使用の式を禁止
+        // "@typescript-eslint/strict-boolean-expressions": "warn" // boolean型の値が必要な場所で、それ以外の型が指定された場合
+        // "@typescript-eslint/consistent-type-imports": [
+        //     "error",
+        //     { "prefer": "type-imports" }
+        // ] // TypeScriptで型のみのインポートを推奨
+    }
 }
