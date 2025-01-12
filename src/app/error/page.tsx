@@ -3,7 +3,7 @@
 export default function ErrorPage() {
     return (
         <div className="flex min-h-screen items-center justify-center">
-            <div className="w-full max-w-md rounded-lg bg-white p-6 text-center ">
+            <div className="w-full max-w-md rounded-lg bg-white p-6 text-center">
                 <h1 className="mb-4 text-4xl font-bold text-red-600">
                     Something went wrong
                 </h1>

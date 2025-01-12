@@ -31,7 +31,7 @@ export default function RootLayout({
                 className={cn(
                     geistSans.variable,
                     geistMono.variable,
-                    'flex min-h-dvh flex-col antialiased relative'
+                    'relative flex min-h-dvh min-w-[300px] flex-col overflow-x-hidden antialiased'
                 )}
             >
                 {children}
