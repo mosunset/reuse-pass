@@ -8,7 +8,7 @@ const Footer = () => {
     return (
         <div className="absolute bottom-0 mt-4 block w-full bg-slate-200 p-4 pt-6">
             <div className="flex justify-around">
-                <Link href="/search">
+                <Link href="/">
                     <div className="flex min-w-[80px] flex-col items-center">
                         <HeroiconsSolidMagnifyingGlass className="!h-8 !w-8" />
                         <div>検索</div>
