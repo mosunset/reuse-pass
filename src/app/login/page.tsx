@@ -1,5 +1,5 @@
 'use client';
-
+import { Suspense } from 'react';
 import { useSearchParams } from 'next/navigation';
 import { Alert, AlertDescription } from '@/components/ui/alert';
 import { Button } from '@/components/ui/button';
@@ -16,8 +16,16 @@ import { Label } from '@/components/ui/label';
 import { login, signup } from './actions';
 
 export default function LoginPage() {
+    return (
+        <Suspense fallback={<div>Loading...</div>}>
+            <InnerLogin />
+        </Suspense>
+    );
+}
+
+function InnerLogin() {
     const searchParams = useSearchParams();
-    const errorparams = searchParams.get('error'); // クエリパラメータ "error" を取得
+    const errorparams = searchParams.get('error');
 
     return (
         <main className="container grid min-h-dvh content-center">
