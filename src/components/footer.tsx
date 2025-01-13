@@ -6,7 +6,7 @@ import HeroiconsSolidMagnifyingGlass from '@/icons/HeroiconsSolidMagnifyingGlass
 
 const Footer = () => {
     return (
-        <footer className="fixed bottom-0 mt-4 block w-full bg-slate-200 p-4 pt-6">
+        <footer className="fixed bottom-0 mt-4 block w-full max-w-[700px] bg-slate-200 p-4 pt-6">
             <div className="flex justify-around">
                 <Link href="/search">
                     <div className="flex min-w-[80px] flex-col items-center">
