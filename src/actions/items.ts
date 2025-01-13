@@ -19,3 +19,12 @@ export const CreateItem = ({ data }: CreateItemProps) => {
         throw new Error(`エラーが発生しました: ${error}`);
     }
 };
+
+export const GetAllItems = async () => {
+    try {
+        const items = await db.items.findMany();
+        return items;
+    } catch (error) {
+        throw new Error(`エラーが発生しました: ${error}`);
+    }
+};
