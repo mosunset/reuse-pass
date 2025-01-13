@@ -20,6 +20,7 @@ import { Textarea } from '@/components/ui/textarea';
 import { createClient } from '@/utils/supabase/client';
 
 const formSchema = z.object({
+    userid: z.string(),
     name: z
         .string()
         .min(3, { message: '商品名は3文字以上で入力してください。' })
@@ -47,12 +48,15 @@ const formSchema = z.object({
         .min(1, { message: '場所を入力してください。' })
         .max(200, { message: '場所は200文字以内で入力してください。' }),
 });
-
-const CreateForm = () => {
+interface CreateFormProps {
+    userid: string;
+}
+const CreateForm = ({ userid }: CreateFormProps) => {
     // 1. Define your form.
     const form = useForm<z.infer<typeof formSchema>>({
         resolver: zodResolver(formSchema),
         defaultValues: {
+            userid: userid,
             name: '',
             description: '',
             photos: [],
@@ -97,7 +101,7 @@ const CreateForm = () => {
         };
 
         await CreateItem({ data: formData });
-        form.reset();
+        form.reset({ name: '', description: '', photos: [], place: '' });
     }
     return (
         <Form {...form}>
@@ -105,6 +109,24 @@ const CreateForm = () => {
                 onSubmit={form.handleSubmit(onSubmit)}
                 className="space-y-8"
             >
+                <FormField
+                    control={form.control}
+                    name="userid"
+                    render={({ field }) => (
+                        <FormItem>
+                            <FormLabel>User Id</FormLabel>
+                            <FormControl>
+                                <Input
+                                    placeholder=""
+                                    disabled
+                                    {...field}
+                                />
+                            </FormControl>
+                            <FormDescription>変更不可</FormDescription>
+                            <FormMessage />
+                        </FormItem>
+                    )}
+                />
                 <FormField
                     control={form.control}
                     name="name"
