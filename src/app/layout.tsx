@@ -1,9 +1,9 @@
 import localFont from 'next/font/local';
 import Footer from '@/components/footer';
+import { Toaster } from '@/components/ui/toaster';
 import { cn } from '@/lib/utils';
 import type { Metadata } from 'next';
 import '@/styles/globals.css';
-import { Toaster } from '@/components/ui/toaster';
 
 const geistSans = localFont({
     src: './fonts/GeistVF.woff',
@@ -32,7 +32,7 @@ export default function RootLayout({
                 className={cn(
                     geistSans.variable,
                     geistMono.variable,
-                    'relative mx-auto flex min-h-dvh min-w-[300px] max-w-[700px] flex-col overflow-x-hidden antialiased'
+                    'relative mx-auto flex min-h-dvh mb-[112px] min-w-[300px] max-w-[700px] flex-col overflow-x-hidden antialiased'
                 )}
             >
                 {children}
