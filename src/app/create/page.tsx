@@ -13,7 +13,7 @@ const Page = async () => {
     return (
         <main className="container p-4">
             <h1 className="mb-4 w-full text-center text-2xl">出品</h1>
-            <CreateForm userid={data.user.id}/>
+            <CreateForm userid={data.user.id} />
         </main>
     );
 };
