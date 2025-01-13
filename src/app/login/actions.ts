@@ -22,7 +22,8 @@ export async function login(formData: FormData) {
     }
 
     revalidatePath('/', 'layout');
-    redirect('/');
+    revalidatePath('/mypage', 'layout');
+    redirect('/mypage');
 }
 
 export async function signup(formData: FormData) {
@@ -43,17 +44,6 @@ export async function signup(formData: FormData) {
     }
 
     revalidatePath('/', 'layout');
-    redirect('/');
-}
-
-export async function signOut() {
-    const supabase = await createClient();
-    const { error } = await supabase.auth.signOut();
-    if (error) {
-        // redirect('/error');
-        redirect('/login?error');
-    }
-
-    revalidatePath('/', 'layout');
-    redirect('/');
+    revalidatePath('/mypage', 'layout');
+    redirect('/mypage');
 }
