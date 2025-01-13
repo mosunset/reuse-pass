@@ -32,10 +32,10 @@ export default function RootLayout({
                 className={cn(
                     geistSans.variable,
                     geistMono.variable,
-                    'relative mx-auto flex min-h-dvh mb-[112px] min-w-[300px] max-w-[700px] flex-col overflow-x-hidden antialiased'
+                    'relative mx-auto flex min-h-dvh min-w-[300px] max-w-[700px] flex-col overflow-x-hidden antialiased'
                 )}
             >
-                {children}
+                <div className="mb-[112px]">{children}</div>
                 <Footer />
                 <Toaster />
             </body>
