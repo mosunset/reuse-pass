@@ -1,3 +1,7 @@
 export default function Home() {
-    return <div>test</div>;
+    return (
+        <div className="grid min-h-dvh place-content-center">
+            このページは見えない はず
+        </div>
+    );
 }
