@@ -6,8 +6,6 @@ const Page = () => {
     SignOut();
     revalidatePath('/', 'layout');
     redirect('/');
-
-    return <div>Sign Out NOW</div>;
 };
 
 export default Page;
