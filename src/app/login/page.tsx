@@ -32,16 +32,22 @@ function InnerLogin() {
 
     const [loading, setLoading] = useState(false);
 
-    function handleLogin(formData: FormData) {
+    async function handleLogin(formData: FormData) {
         setLoading(true);
-        login(formData);
-        setLoading(false);
+        try {
+            await login(formData);
+        } finally {
+            setLoading(false);
+        }
     }
 
-    function handleSignup(formData: FormData) {
+    async function handleSignup(formData: FormData) {
         setLoading(true);
-        signup(formData);
-        setLoading(false);
+        try {
+            await signup(formData);
+        } finally {
+            setLoading(false);
+        }
     }
 
     return (
