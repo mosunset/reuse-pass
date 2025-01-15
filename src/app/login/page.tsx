@@ -51,7 +51,7 @@ function InnerLogin() {
     }
 
     return (
-        <main className="container grid min-h-dvh content-center bg-gradient-to-b from-green-100 to-white">
+        <main className="grid min-h-dvh w-full content-center bg-gradient-to-b from-green-100 to-white">
             <div className="flex w-full justify-center p-4">
                 <Card className="w-full max-w-md">
                     <CardHeader className="space-y-1">
