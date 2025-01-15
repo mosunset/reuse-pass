@@ -19,7 +19,7 @@ const HomeContent = () => {
     const errorparams = searchParams.get('error');
 
     return (
-        <div className="p-4 pb-[112px] bg-gradient-to-b from-green-100 to-white">
+        <div className="bg-gradient-to-b from-green-100 to-white p-4 pb-[112px]">
             <header className="mt-8 w-full max-w-4xl">
                 <h1 className="text-center text-3xl font-bold text-green-800">
                     ReUse Pass へようこそ
