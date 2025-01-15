@@ -11,7 +11,7 @@ const Page = async () => {
         redirect('/login');
     }
     return (
-        <main className="container p-4">
+        <main className="mx-auto p-4">
             <h1 className="mb-4 w-full text-center text-2xl">出品</h1>
             <SellForm userid={data.user.id} />
         </main>
