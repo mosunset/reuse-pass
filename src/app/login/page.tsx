@@ -60,7 +60,12 @@ function InnerLogin() {
                         </CardTitle>
                         <CardDescription>Login or Sign up</CardDescription>
                     </CardHeader>
-                    <form>
+                    <form
+                        onSubmit={(e) => {
+                            e.preventDefault();
+                            handleLogin(new FormData(e.currentTarget));
+                        }}
+                    >
                         <CardContent className="space-y-4">
                             <div className="space-y-2">
                                 <Label htmlFor="email">Email</Label>
@@ -95,27 +100,41 @@ function InnerLogin() {
                         </CardContent>
                         <CardFooter className="flex justify-between">
                             <Button
-                                formAction={handleLogin}
-                                type="submit"
+                                type="button"
+                                onClick={() =>
+                                    handleLogin(
+                                        new FormData(
+                                            document.querySelector('form')!
+                                        )
+                                    )
+                                }
                                 variant="outline"
+                                disabled={loading}
                             >
                                 {loading ? (
                                     <div className="flex items-center space-x-2">
                                         <RotateCw className="animate-spin" />
-                                        <div>Loading </div>
+                                        <div>Loading</div>
                                     </div>
                                 ) : (
                                     'Log in'
                                 )}
                             </Button>
                             <Button
-                                formAction={handleSignup}
-                                type="submit"
+                                type="button"
+                                onClick={() =>
+                                    handleSignup(
+                                        new FormData(
+                                            document.querySelector('form')!
+                                        )
+                                    )
+                                }
+                                disabled={loading}
                             >
                                 {loading ? (
                                     <div className="flex items-center space-x-2">
                                         <RotateCw className="animate-spin" />
-                                        <div>Loading </div>
+                                        <div>Loading</div>
                                     </div>
                                 ) : (
                                     'Sign up'
