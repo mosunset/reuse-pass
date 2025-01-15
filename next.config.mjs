@@ -1,7 +1,7 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
     reactStrictMode: true,
-    trailingSlash: false, // URL末尾のスラッシュ
+    trailingSlash: true, // URL末尾のスラッシュ
     // output: "export",
     images: {
         remotePatterns: [
