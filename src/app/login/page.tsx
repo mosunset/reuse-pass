@@ -1,5 +1,6 @@
 'use client';
-import { Suspense } from 'react';
+import { Suspense, useState } from 'react';
+import { RotateCw } from 'lucide-react';
 import Link from 'next/link';
 import { useSearchParams } from 'next/navigation';
 import { Alert, AlertDescription } from '@/components/ui/alert';
@@ -28,6 +29,20 @@ export default function LoginPage() {
 function InnerLogin() {
     const searchParams = useSearchParams();
     const errorparams = searchParams.get('error');
+
+    const [loading, setLoading] = useState(false);
+
+    function handleLogin(formData: FormData) {
+        setLoading(true);
+        login(formData);
+        setLoading(false);
+    }
+
+    function handleSignup(formData: FormData) {
+        setLoading(true);
+        signup(formData);
+        setLoading(false);
+    }
 
     return (
         <main className="container grid min-h-dvh content-center bg-gradient-to-b from-green-100 to-white">
@@ -74,17 +89,31 @@ function InnerLogin() {
                         </CardContent>
                         <CardFooter className="flex justify-between">
                             <Button
-                                formAction={login}
+                                formAction={handleLogin}
                                 type="submit"
                                 variant="outline"
                             >
-                                Log in
+                                {loading ? (
+                                    <div className="flex items-center space-x-2">
+                                        <RotateCw className="animate-spin" />
+                                        <div>Loading </div>
+                                    </div>
+                                ) : (
+                                    'Log in'
+                                )}
                             </Button>
                             <Button
-                                formAction={signup}
+                                formAction={handleSignup}
                                 type="submit"
                             >
-                                Sign up
+                                {loading ? (
+                                    <div className="flex items-center space-x-2">
+                                        <RotateCw className="animate-spin" />
+                                        <div>Loading </div>
+                                    </div>
+                                ) : (
+                                    'Sign up'
+                                )}
                             </Button>
                         </CardFooter>
                     </form>
