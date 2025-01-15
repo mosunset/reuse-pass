@@ -1,6 +1,8 @@
 'use client';
 
+import { useState } from 'react';
 import { zodResolver } from '@hookform/resolvers/zod';
+import { Loader2 } from 'lucide-react';
 import { useRouter } from 'next/navigation';
 import { useForm } from 'react-hook-form';
 import { v4 as uuid } from 'uuid';
@@ -57,6 +59,7 @@ interface SellFormProps {
 const SellForm = ({ userid }: SellFormProps) => {
     const { toast } = useToast();
     const router = useRouter();
+    const [loading, setLoading] = useState(false);
 
     // 1. Define your form.
     const form = useForm<z.infer<typeof formSchema>>({
@@ -76,48 +79,62 @@ const SellForm = ({ userid }: SellFormProps) => {
         // フォームの値を処理します。
         // ✅ これは型安全でバリデート済みです。
 
-        // Create Supabase client
-        const supabase = createClient();
-        // Upload photos to Supabase
-        const uploadedPhotos = await Promise.all(
-            values.photos.map(async (file: File) => {
-                const fileExtension = file.name.split('.').pop();
-                const { data: uploadData, error: uploadError } =
-                    await supabase.storage
-                        .from('photos')
-                        .upload(
-                            `${Date.now()}_${uuid()}.${fileExtension}`,
-                            file
-                        );
-                if (uploadError) {
-                    throw new Error(
-                        `アップロードに失敗しました: ${uploadError.message}`
-                    );
-                }
-                const url = supabase.storage
-                    .from('photos')
-                    .getPublicUrl(uploadData.path).data.publicUrl;
-                return url;
-            })
-        );
-
-        const formData = {
-            ...values,
-            photos: uploadedPhotos,
-        };
+        setLoading(true);
 
         try {
-            const item = await CreateItem({ data: formData });
+            // Create Supabase client
+            const supabase = createClient();
+            // Upload photos to Supabase
+            const uploadedPhotos = await Promise.all(
+                values.photos.map(async (file: File) => {
+                    const fileExtension = file.name.split('.').pop();
+                    const { data: uploadData, error: uploadError } =
+                        await supabase.storage
+                            .from('photos')
+                            .upload(
+                                `${Date.now()}_${uuid()}.${fileExtension}`,
+                                file
+                            );
+                    if (uploadError) {
+                        throw new Error(
+                            `アップロードに失敗しました: ${uploadError.message}`
+                        );
+                    }
+                    const url = supabase.storage
+                        .from('photos')
+                        .getPublicUrl(uploadData.path).data.publicUrl;
+                    return url;
+                })
+            );
+            const formData = {
+                ...values,
+                photos: uploadedPhotos,
+            };
 
-            router.push(`/search/${item.id}`);
+            try {
+                const item = await CreateItem({ data: formData });
+
+                router.push(`/search/${item.id}`);
+            } catch {
+                toast({
+                    variant: 'destructive',
+                    title: 'エラーが発生しました',
+                    description:
+                        '商品の出品に失敗しました。もう一度お試しください。',
+                    action: <ToastAction altText={'OK'}>OK</ToastAction>,
+                });
+            } finally {
+                setLoading(false);
+            }
         } catch {
             toast({
                 variant: 'destructive',
                 title: 'エラーが発生しました',
                 description:
-                    '商品の出品に失敗しました。もう一度お試しください。',
+                    '画像のアップロードに失敗しました。もう一度お試しください。',
                 action: <ToastAction altText={'OK'}>OK</ToastAction>,
             });
+            setLoading(false);
         }
     }
     return (
@@ -224,7 +241,13 @@ const SellForm = ({ userid }: SellFormProps) => {
                         </FormItem>
                     )}
                 />
-                <Button type="submit">出品</Button>
+                <Button
+                    type="submit"
+                    disabled={loading}
+                >
+                    {loading && <Loader2 className="h-12 w-12 animate-spin" />}
+                    出品
+                </Button>
             </form>
         </Form>
     );
