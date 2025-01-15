@@ -1,5 +1,6 @@
 'use client';
 
+import React, { Suspense } from 'react';
 import { Search, Upload, AlertCircle } from 'lucide-react';
 import Link from 'next/link';
 import { useSearchParams } from 'next/navigation';
@@ -12,9 +13,10 @@ import {
     CardTitle,
 } from '@/components/ui/card';
 
-export default function Home() {
+const HomeContent = () => {
     const searchParams = useSearchParams();
     const errorparams = searchParams.get('error');
+
     return (
         <div className="flex min-h-screen flex-col items-center justify-between bg-gradient-to-b from-green-100 to-white p-4">
             <header className="mt-8 w-full max-w-4xl">
@@ -100,4 +102,14 @@ export default function Home() {
             </main>
         </div>
     );
-}
+};
+
+const Home = () => {
+    return (
+        <Suspense fallback={<div>読み込み中...</div>}>
+            <HomeContent />
+        </Suspense>
+    );
+};
+
+export default Home;
