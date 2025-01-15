@@ -32,7 +32,7 @@ export default function RootLayout({
                 className={cn(
                     geistSans.variable,
                     geistMono.variable,
-                    'relative mx-auto flex h-dvh box-border min-w-[300px] max-w-[700px] flex-col overflow-x-hidden antialiased'
+                    'relative mx-auto flex h-dvh box-border min-w-[316px] max-w-[700px] flex-col overflow-x-hidden antialiased'
                 )}
             >
                 <div className="box-border pb-[112px] min-h-full">{children}</div>
