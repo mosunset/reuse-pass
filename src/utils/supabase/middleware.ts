@@ -39,7 +39,7 @@ export async function updateSession(request: NextRequest) {
     const userAgent = request.headers.get('user-agent')?.toLowerCase() || '';
 
     // ブラウザがChrome以外で、パスが '/' かつ 'error' パラメータが 'unsupported_browser' でない場合にリダイレクト
-    const errorvalue = "unsupported_browser"
+    const errorvalue = 'unsupported_browser';
     if (
         !userAgent.includes('chrome') &&
         request.nextUrl.pathname === '/' &&
@@ -72,7 +72,6 @@ export async function updateSession(request: NextRequest) {
         !request.nextUrl.pathname.startsWith('/error') &&
         request.nextUrl.pathname !== '/'
     ) {
-
         const url = request.nextUrl.clone();
         url.pathname = '/login';
         return NextResponse.redirect(url);
