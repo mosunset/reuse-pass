@@ -22,8 +22,25 @@ export const CreateItem = ({ data }: CreateItemProps) => {
 
 export const GetAllItems = async () => {
     try {
-        const items = await db.items.findMany();
+        const items = await db.items.findMany({
+            orderBy: {
+                createdAt: 'desc',
+            },
+        });
         return items;
+    } catch (error) {
+        throw new Error(`エラーが発生しました: ${error}`);
+    }
+};
+
+export const GetItemById = async (id: number) => {
+    try {
+        const item = await db.items.findUnique({
+            where: {
+                id,
+            },
+        });
+        return item;
     } catch (error) {
         throw new Error(`エラーが発生しました: ${error}`);
     }
