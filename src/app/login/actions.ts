@@ -39,11 +39,28 @@ export async function signup(formData: FormData) {
     const { error } = await supabase.auth.signUp(data);
 
     if (error) {
-        // redirect('/error');
-        redirect('/login?error');
-    }
+        if (error.code === 'user_already_exists') {
+            // 既にサインアップされている場合、ログイン処理を実行
+            const { error: signInError } =
+                await supabase.auth.signInWithPassword({
+                    email: data.email,
+                    password: data.password,
+                });
 
-    revalidatePath('/', 'layout');
-    revalidatePath('/mypage', 'layout');
-    redirect('/mypage');
+            if (signInError) {
+                redirect('/login?error');
+            } else {
+                revalidatePath('/', 'layout');
+                revalidatePath('/mypage', 'layout');
+                redirect('/mypage');
+            }
+        } else {
+            // その他のエラーの場合、ログインページにリダイレクト
+            redirect('/login?error');
+        }
+    } else {
+        revalidatePath('/', 'layout');
+        revalidatePath('/mypage', 'layout');
+        redirect('/mypage');
+    }
 }
