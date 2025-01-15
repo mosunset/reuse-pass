@@ -1,6 +1,7 @@
 'use client';
 
 import { zodResolver } from '@hookform/resolvers/zod';
+import { useRouter } from 'next/navigation';
 import { useForm } from 'react-hook-form';
 import { v4 as uuid } from 'uuid';
 import { z } from 'zod';
@@ -17,6 +18,8 @@ import {
 } from '@/components/ui/form';
 import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
+import { ToastAction } from '@/components/ui/toast';
+import { useToast } from '@/hooks/use-toast';
 import { createClient } from '@/utils/supabase/client';
 
 const formSchema = z.object({
@@ -52,15 +55,18 @@ interface SellFormProps {
     userid: string;
 }
 const SellForm = ({ userid }: SellFormProps) => {
+    const { toast } = useToast();
+    const router = useRouter();
+
     // 1. Define your form.
     const form = useForm<z.infer<typeof formSchema>>({
         resolver: zodResolver(formSchema),
         defaultValues: {
             userid: userid,
-            name: '',
-            description: '',
+            name: '初期値初期値初期値',
+            description: '初期値初期値初期値初期値',
             photos: [],
-            place: '',
+            place: '初期値',
         },
         mode: 'all',
     });
@@ -100,8 +106,19 @@ const SellForm = ({ userid }: SellFormProps) => {
             photos: uploadedPhotos,
         };
 
-        await CreateItem({ data: formData });
-        form.reset({ name: '', description: '', photos: [], place: '' });
+        try {
+            const item = await CreateItem({ data: formData });
+
+            router.push(`/search/${item.id}`);
+        } catch {
+            toast({
+                variant: 'destructive',
+                title: 'エラーが発生しました',
+                description:
+                    '商品の出品に失敗しました。もう一度お試しください。',
+                action: <ToastAction altText={'OK'}>OK</ToastAction>,
+            });
+        }
     }
     return (
         <Form {...form}>
