@@ -1,5 +1,6 @@
 'use client';
 import { Suspense } from 'react';
+import Link from 'next/link';
 import { useSearchParams } from 'next/navigation';
 import { Alert, AlertDescription } from '@/components/ui/alert';
 import { Button } from '@/components/ui/button';
@@ -28,7 +29,7 @@ function InnerLogin() {
     const errorparams = searchParams.get('error');
 
     return (
-        <main className="container grid min-h-dvh content-center">
+        <main className="container grid min-h-dvh content-center bg-gradient-to-b from-green-100 to-white">
             <div className="flex w-full justify-center p-4">
                 <Card className="w-full max-w-md">
                     <CardHeader className="space-y-1">
@@ -86,6 +87,15 @@ function InnerLogin() {
                             </Button>
                         </CardFooter>
                     </form>
+                    <CardFooter className="flex justify-center">
+                        <Button
+                            asChild
+                            variant="link"
+                            className=""
+                        >
+                            <Link href="/">Topページに戻る</Link>
+                        </Button>
+                    </CardFooter>
                 </Card>
             </div>
         </main>
