@@ -12,6 +12,7 @@ import {
     CardHeader,
     CardTitle,
 } from '@/components/ui/card';
+import Loading from './loading';
 
 const HomeContent = () => {
     const searchParams = useSearchParams();
@@ -106,7 +107,7 @@ const HomeContent = () => {
 
 const Home = () => {
     return (
-        <Suspense fallback={<div>読み込み中...</div>}>
+        <Suspense fallback={<Loading />}>
             <HomeContent />
         </Suspense>
     );
