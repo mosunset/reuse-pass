@@ -66,10 +66,10 @@ const SellForm = ({ userid }: SellFormProps) => {
         resolver: zodResolver(formSchema),
         defaultValues: {
             userid: userid,
-            name: '初期値初期値初期値',
-            description: '初期値初期値初期値初期値',
+            name: '',
+            description: '',
             photos: [],
-            place: '初期値',
+            place: '',
         },
         mode: 'all',
     });
