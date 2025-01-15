@@ -19,7 +19,7 @@ const HomeContent = () => {
     const errorparams = searchParams.get('error');
 
     return (
-        <div className="flex min-h-screen flex-col items-center justify-between bg-gradient-to-b from-green-100 to-white p-4">
+        <div className="p-4 pb-[112px] bg-gradient-to-b from-green-100 to-white">
             <header className="mt-8 w-full max-w-4xl">
                 <h1 className="text-center text-3xl font-bold text-green-800">
                     ReUse Pass へようこそ
@@ -31,7 +31,7 @@ const HomeContent = () => {
 
             <main className="flex w-full max-w-4xl flex-grow flex-col items-center justify-center space-y-6">
                 {errorparams === 'unsupported_browser' && (
-                    <div className="flex flex-col items-center space-x-2 space-y-2 rounded-md bg-red-300 p-3 text-black">
+                    <div className="mt-4 flex flex-col items-center space-x-2 space-y-2 rounded-md bg-red-300 p-3 text-black">
                         <div className="flex items-center space-x-2">
                             <AlertCircle className="h-5 w-5" />
                             <p className="text-sm">

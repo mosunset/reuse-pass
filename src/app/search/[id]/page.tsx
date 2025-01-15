@@ -25,7 +25,7 @@ const Page = async (props: { params: { id: string } }) => {
     }
 
     return (
-        <main className="p-4">
+        <main className="p-4 pb-[112px]">
             <h1 className="mb-4 w-full text-center text-2xl">商品詳細</h1>
             <Breadcrumb>
                 <BreadcrumbList>

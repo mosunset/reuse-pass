@@ -11,7 +11,7 @@ const Page = async () => {
         redirect('/login');
     }
     return (
-        <main className="p-4">
+        <main className="p-4 pb-[112px]">
             <h1 className="mb-4 w-full text-center text-2xl">検索</h1>
             <div>
                 <GetAll />

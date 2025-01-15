@@ -14,7 +14,7 @@ const Page = async () => {
     }
 
     return (
-        <main className="p-4">
+        <main className="p-4 pb-[112px]">
             <h1 className="mb-4 w-full text-center text-2xl">My Page</h1>
             <div className="flex items-center space-x-4">
                 <Avatar>
