@@ -3,7 +3,6 @@ import Link from 'next/link';
 import { GetItemById } from '@/actions/items';
 import {
     Breadcrumb,
-    BreadcrumbEllipsis,
     BreadcrumbItem,
     BreadcrumbLink,
     BreadcrumbList,
