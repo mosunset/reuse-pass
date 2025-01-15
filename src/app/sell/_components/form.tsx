@@ -48,10 +48,10 @@ const formSchema = z.object({
         .min(1, { message: '場所を入力してください。' })
         .max(200, { message: '場所は200文字以内で入力してください。' }),
 });
-interface CreateFormProps {
+interface SellFormProps {
     userid: string;
 }
-const CreateForm = ({ userid }: CreateFormProps) => {
+const SellForm = ({ userid }: SellFormProps) => {
     // 1. Define your form.
     const form = useForm<z.infer<typeof formSchema>>({
         resolver: zodResolver(formSchema),
@@ -213,4 +213,4 @@ const CreateForm = ({ userid }: CreateFormProps) => {
     );
 };
 
-export default CreateForm;
+export default SellForm;

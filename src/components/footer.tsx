@@ -14,7 +14,7 @@ const Footer = () => {
                         <div>検索</div>
                     </div>
                 </Link>
-                <Link href="/create">
+                <Link href="/sell">
                     <div className="flex min-w-[80px] flex-col items-center">
                         <HeroiconsSolidCamera className="!h-8 !w-8" />
                         <div>出品</div>
