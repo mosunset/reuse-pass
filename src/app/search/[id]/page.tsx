@@ -1,6 +1,7 @@
 import { MapPin, Calendar } from 'lucide-react';
 import Image from 'next/image';
 import Link from 'next/link';
+import { redirect } from 'next/navigation';
 import { GetItemById } from '@/actions/items';
 import {
     Breadcrumb,
@@ -10,6 +11,7 @@ import {
     BreadcrumbPage,
     BreadcrumbSeparator,
 } from '@/components/ui/breadcrumb';
+import { Button } from '@/components/ui/button';
 import {
     Carousel,
     CarouselContent,
@@ -17,8 +19,17 @@ import {
     CarouselPrevious,
     CarouselNext,
 } from '@/components/ui/carousel';
+import { createClient } from '@/utils/supabase/server';
 
 const Page = async (props: { params: { id: string } }) => {
+    // ユーザー認証
+    const supabase = await createClient();
+
+    const { data, error } = await supabase.auth.getUser();
+    if (error || !data?.user) {
+        redirect('/login');
+    }
+
     const item = await GetItemById(Number(props.params.id));
     if (!item) {
         return (
@@ -94,6 +105,11 @@ const Page = async (props: { params: { id: string } }) => {
                             </>
                         )}
                     </Carousel>
+                </div>
+                <div>
+                    <Button disabled={data?.user?.id === item.userid}>
+                        購入
+                    </Button>
                 </div>
             </div>
         </main>
