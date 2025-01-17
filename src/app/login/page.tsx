@@ -1,5 +1,5 @@
 'use client';
-import { Suspense, useState, useTransition } from 'react';
+import { Suspense, useTransition } from 'react';
 import { AlertCircle, RotateCw } from 'lucide-react';
 import Link from 'next/link';
 import { Alert, AlertDescription } from '@/components/ui/alert';
