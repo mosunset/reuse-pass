@@ -93,6 +93,9 @@ export const SearchItems = async (keyword: string) => {
                     },
                 ],
             },
+            orderBy: {
+                createdAt: 'desc',
+            },
         });
         return items;
     } catch (error) {
