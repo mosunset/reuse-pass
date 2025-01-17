@@ -16,12 +16,24 @@ datasource db {
 
 model Items {
   id          Int      @id @default(autoincrement())
-  userid      String
+  userid      String // Seller id
   name        String
   description String
   photos      String[]
   place       String
+  buy         Buy?     // 一対一リレーションに変更
 
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Buy {
+  id        Int      @id @default(autoincrement())
+  userid    String // Buyer id
+  itemid    Int      @unique // 一意制約を追加
+  item      Items    @relation(fields: [itemid], references: [id])
+  price     Int
+  status    String
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 }
