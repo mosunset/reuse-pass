@@ -42,7 +42,8 @@ export async function updateSession(request: NextRequest) {
     const errorvalue = 'unsupported_browser';
     if (
         !userAgent.includes('chrome') &&
-        request.nextUrl.pathname === '/' &&
+        (request.nextUrl.pathname === '/' ||
+            request.nextUrl.pathname.startsWith('/login')) &&
         request.nextUrl.searchParams.get('error') !== errorvalue
     ) {
         // 現在のURLをクローンし、'error' パラメータを 'unsupported_browser' に設定
