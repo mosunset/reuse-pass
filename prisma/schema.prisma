@@ -17,7 +17,6 @@ datasource db {
 model Items {
   id          Int      @id @default(autoincrement())
   userid      String
-  buyerid     String?
   name        String
   description String
   photos      String[]
