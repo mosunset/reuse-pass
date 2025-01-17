@@ -1,6 +1,6 @@
 'use client';
 import { Suspense, useState } from 'react';
-import { RotateCw } from 'lucide-react';
+import { AlertCircle, RotateCw } from 'lucide-react';
 import Link from 'next/link';
 import { useSearchParams } from 'next/navigation';
 import { Alert, AlertDescription } from '@/components/ui/alert';
@@ -15,6 +15,7 @@ import {
 } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
+import { cn } from '@/lib/utils';
 import { login, signup } from './actions';
 import Loading from './loading';
 
@@ -52,8 +53,34 @@ function InnerLogin() {
 
     return (
         <main className="grid min-h-dvh w-full content-center bg-gradient-to-b from-green-100 to-white">
+            <div className="mx-auto max-w-xl">
+                {errorparams === 'unsupported_browser' && (
+                    <div className="mt-4 flex flex-col items-center space-x-2 space-y-2 rounded-md border-2 border-red-500 bg-red-300 p-3 text-black">
+                        <div className="flex items-center space-x-2">
+                            <AlertCircle className="h-5 w-5" />
+                            <p className="text-sm">
+                                なるべくGoogle Chrome で開いてください
+                            </p>
+                        </div>
+                        <Link
+                            href="https://www.google.com/intl/ja_jp/chrome/"
+                            className="underline"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                        >
+                            Google Chrome をダウンロード
+                        </Link>
+                    </div>
+                )}
+            </div>
             <div className="flex w-full justify-center p-4">
-                <Card className="w-full max-w-md">
+                <Card
+                    className={cn(
+                        'w-full max-w-md',
+                        errorparams === 'unsupported_browser' &&
+                            'border-2 border-red-500'
+                    )}
+                >
                     <CardHeader className="space-y-1">
                         <CardTitle className="text-2xl font-bold">
                             ReUse Pass
