@@ -20,7 +20,7 @@ const HomeContent = () => {
 
     return (
         <div className="bg-gradient-to-b from-green-100 to-white p-4 pb-[112px]">
-            <header className="mt-8 w-full max-w-4xl">
+            <header className="mb-6 mt-8 w-full max-w-4xl">
                 <h1 className="text-center text-3xl font-bold text-green-800">
                     ReUse Pass へようこそ
                 </h1>
@@ -31,7 +31,7 @@ const HomeContent = () => {
 
             <main className="flex w-full max-w-4xl flex-grow flex-col items-center justify-center space-y-6">
                 {errorparams === 'unsupported_browser' && (
-                    <div className="mt-4 flex flex-col items-center space-x-2 space-y-2 rounded-md border-2 border-red-500 bg-red-300 p-3 text-black">
+                    <div className="flex flex-col items-center space-x-2 space-y-2 rounded-md border-2 border-red-500 bg-red-300 p-3 text-black">
                         <div className="flex items-center space-x-2">
                             <AlertCircle className="h-5 w-5" />
                             <p className="text-sm">
