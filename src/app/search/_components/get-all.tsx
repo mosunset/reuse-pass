@@ -18,14 +18,7 @@ import {
 } from '@/components/ui/carousel';
 
 const GetAll = async () => {
-    const data = GetAllItems();
-    // name: string;
-    // id: number;
-    // description: string;
-    // photos: string[];
-    // place: string;
-    // createdAt: Date;
-    // updatedAt: Date;
+    const data = GetAllItems(3);
     return (
         <div className="grid grid-cols-1 gap-4">
             {(await data).map((item) => (
