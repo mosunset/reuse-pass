@@ -20,12 +20,18 @@ export const CreateItem = ({ data }: CreateItemProps) => {
     }
 };
 
-export const GetAllItems = async () => {
+/**
+ *
+ * @param limit
+ * @returns
+ */
+export const GetAllItems = async (limit: number = 0) => {
     try {
         const items = await db.items.findMany({
             orderBy: {
                 createdAt: 'desc',
             },
+            ...(limit > 0 && { take: limit }),
         });
         return items;
     } catch (error) {
