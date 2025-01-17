@@ -104,6 +104,7 @@ const SellForm = ({ userid }: SellFormProps) => {
                 const formData = {
                     ...values,
                     photos: uploadedPhotos,
+                    buyerid: "",
                 };
 
                 try {
