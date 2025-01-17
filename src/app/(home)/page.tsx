@@ -3,7 +3,6 @@
 import React, { Suspense } from 'react';
 import { Search, Upload, AlertCircle } from 'lucide-react';
 import Link from 'next/link';
-import { useSearchParams } from 'next/navigation';
 import { Button } from '@/components/ui/button';
 import {
     Card,
@@ -14,9 +13,16 @@ import {
 } from '@/components/ui/card';
 import Loading from './loading';
 
-const HomeContent = () => {
-    const searchParams = useSearchParams();
-    const errorparams = searchParams.get('error');
+const Home = ({ searchParams }: { searchParams: { error: string } }) => {
+    return (
+        <Suspense fallback={<Loading />}>
+            <HomeContent error={searchParams.error}/>
+        </Suspense>
+    );
+};
+
+const HomeContent = ({ error }: { error: string }) => {
+    const errorparams = error;
 
     return (
         <div className="bg-gradient-to-b from-green-100 to-white p-4 pb-[112px]">
@@ -102,14 +108,6 @@ const HomeContent = () => {
                 </Card>
             </main>
         </div>
-    );
-};
-
-const Home = () => {
-    return (
-        <Suspense fallback={<Loading />}>
-            <HomeContent />
-        </Suspense>
     );
 };
 

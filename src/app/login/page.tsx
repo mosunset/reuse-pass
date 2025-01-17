@@ -19,17 +19,20 @@ import { cn } from '@/lib/utils';
 import { login, signup } from './actions';
 import Loading from './loading';
 
-export default function LoginPage() {
+export default function LoginPage({
+    searchParams,
+}: {
+    searchParams: { error: string };
+}) {
     return (
         <Suspense fallback={<Loading />}>
-            <InnerLogin />
+            <InnerLogin error={searchParams.error} />
         </Suspense>
     );
 }
 
-function InnerLogin() {
-    const searchParams = useSearchParams();
-    const errorparams = searchParams.get('error');
+const InnerLogin = ({ error }: { error: string }) => {
+    const errorparams = error;
 
     const [loading, setLoading] = useState(false);
 
@@ -182,4 +185,4 @@ function InnerLogin() {
             </div>
         </main>
     );
-}
+};
