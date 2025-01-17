@@ -39,11 +39,7 @@ const formSchema = z.object({
         .transform((val) => (val instanceof FileList ? Array.from(val) : []))
         .refine(
             (files) =>
-                files.every((file: File) =>
-                    ['image/*'].includes(
-                        file.type
-                    )
-                ),
+                files.every((file: File) => ['image/*'].includes(file.type)),
             {
                 message: 'jpg/png/webpファイルのみアップロードしてください。',
             }
