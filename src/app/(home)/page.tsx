@@ -31,7 +31,7 @@ const HomeContent = () => {
 
             <main className="flex w-full max-w-4xl flex-grow flex-col items-center justify-center space-y-6">
                 {errorparams === 'unsupported_browser' && (
-                    <div className="mt-4 flex flex-col items-center space-x-2 space-y-2 rounded-md bg-red-300 p-3 text-black">
+                    <div className="mt-4 flex flex-col items-center space-x-2 space-y-2 rounded-md border-2 border-red-500 bg-red-300 p-3 text-black">
                         <div className="flex items-center space-x-2">
                             <AlertCircle className="h-5 w-5" />
                             <p className="text-sm">
