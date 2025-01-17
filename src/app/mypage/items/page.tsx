@@ -1,6 +1,6 @@
 import { redirect } from 'next/navigation';
 import { createClient } from '@/utils/supabase/server';
-import GetUserItems from '../_components/get-user-items';
+import GetUserItems from './_components/get-user-items';
 
 const Page = async () => {
     const supabase = await createClient();

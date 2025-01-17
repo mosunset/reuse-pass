@@ -17,16 +17,22 @@ import {
     CarouselPrevious,
 } from '@/components/ui/carousel';
 
-const RenderUserItems = async ({ userid }: { userid: string }) => { // 関数名を変更
+const RenderUserItems = async ({ userid }: { userid: string }) => {
+    // 関数名を変更
     const data = await FetchUserItems(userid); // 名前を変更して呼び出し
     return (
         <div className="grid grid-cols-1 gap-4">
             {data.map((item) => (
-                <Link key={item.id} href={`/search/${item.id}`}>
+                <Link
+                    key={item.id}
+                    href={`/search/${item.id}`}
+                >
                     <Card>
                         <CardHeader>
                             <CardTitle>{item.name}</CardTitle>
-                            <CardDescription>{item.description}</CardDescription>
+                            <CardDescription>
+                                {item.description}
+                            </CardDescription>
                         </CardHeader>
                         <CardContent>
                             <Carousel className="mx-auto w-full max-w-[300px]">
@@ -52,7 +58,9 @@ const RenderUserItems = async ({ userid }: { userid: string }) => { // 関数名
                         </CardContent>
                         <CardFooter className="flex flex-col items-start gap-4">
                             <div>{item.place}</div>
-                            <div>{new Date(item.createdAt).toLocaleString()}</div>
+                            <div>
+                                {new Date(item.createdAt).toLocaleString()}
+                            </div>
                         </CardFooter>
                     </Card>
                 </Link>
