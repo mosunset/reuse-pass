@@ -49,7 +49,7 @@ const Page = async (props: { params: { id: string } }) => {
                 </BreadcrumbList>
             </Breadcrumb>
 
-            <div className="grid gap-8 grid-cols-1">
+            <div className="grid grid-cols-1 gap-8">
                 <div className="space-y-6">
                     <h1 className="text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">
                         {item.name}
