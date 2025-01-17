@@ -102,3 +102,20 @@ export const SearchItems = async (keyword: string) => {
         throw new Error(`エラーが発生しました: ${error}`);
     }
 };
+
+
+export const GetUserItems = async (userid: string) => {
+    try {
+        const items = await db.items.findMany({
+            where: {
+                userid: userid,
+            },
+            orderBy: {
+                createdAt: 'desc',
+            },
+        });
+        return items;
+    } catch (error) {
+        throw new Error(`ユーザーの出品物を取得できませんでした: ${error}`);
+    }
+};
