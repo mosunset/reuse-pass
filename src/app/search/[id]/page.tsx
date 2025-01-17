@@ -11,7 +11,6 @@ import {
     BreadcrumbPage,
     BreadcrumbSeparator,
 } from '@/components/ui/breadcrumb';
-import { Button } from '@/components/ui/button';
 import {
     Carousel,
     CarouselContent,
@@ -20,7 +19,6 @@ import {
     CarouselNext,
 } from '@/components/ui/carousel';
 import { createClient } from '@/utils/supabase/server';
-import { BuyItem } from './buy-item';
 import BuyButton from './_components/buy-button';
 
 const Page = async (props: { params: { id: string } }) => {
