@@ -40,7 +40,7 @@ const formSchema = z.object({
         .refine(
             (files) =>
                 files.every((file: File) =>
-                    ['image/jpeg', 'image/png', 'image/webp'].includes(
+                    ['image/*'].includes(
                         file.type
                     )
                 ),
@@ -209,7 +209,7 @@ const SellForm = ({ userid }: SellFormProps) => {
                                 <Input
                                     type="file"
                                     multiple
-                                    accept="image/jpeg,image/png,image/webp"
+                                    accept="image/*"
                                     onChange={(event) =>
                                         field.onChange(event.target.files)
                                     }
