@@ -22,8 +22,8 @@ export async function login(formData: FormData) {
     }
 
     revalidatePath('/', 'layout');
-    revalidatePath('/mypage', 'layout');
-    redirect('/mypage');
+    revalidatePath('/search', 'layout');
+    redirect('/search');
 }
 
 export async function signup(formData: FormData) {
@@ -51,8 +51,8 @@ export async function signup(formData: FormData) {
                 redirect('/login?error');
             } else {
                 revalidatePath('/', 'layout');
-                revalidatePath('/mypage', 'layout');
-                redirect('/mypage');
+                revalidatePath('/search', 'layout');
+                redirect('/search');
             }
         } else {
             // その他のエラーの場合、ログインページにリダイレクト
@@ -60,7 +60,7 @@ export async function signup(formData: FormData) {
         }
     } else {
         revalidatePath('/', 'layout');
-        revalidatePath('/mypage', 'layout');
-        redirect('/mypage');
+        revalidatePath('/search', 'layout');
+        redirect('/search');
     }
 }
