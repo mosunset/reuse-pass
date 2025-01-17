@@ -16,7 +16,7 @@ import Loading from './loading';
 const Home = ({ searchParams }: { searchParams: { error: string } }) => {
     return (
         <Suspense fallback={<Loading />}>
-            <HomeContent error={searchParams.error}/>
+            <HomeContent error={searchParams.error} />
         </Suspense>
     );
 };
