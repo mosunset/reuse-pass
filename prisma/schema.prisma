@@ -21,7 +21,7 @@ model Items {
   description String
   photos      String[]
   place       String
-  buy         Buy?     // 一対一リレーションに変更
+  buy         Buy? // 一対一リレーションに変更
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
@@ -34,6 +34,16 @@ model Buy {
   item      Items    @relation(fields: [itemid], references: [id])
   price     Int
   status    String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model User {
+  id        Int      @id @default(autoincrement())
+  userid    String   @unique // authのidをcreate時に入れる
+  name      String   @default("無名のユーザ") // 表示名
+  bio       String?  @default("よろしくお願いします") // 自己紹介
+  icon      String?  @default("/KUT_logo.gif") // アイコン画像
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 }
