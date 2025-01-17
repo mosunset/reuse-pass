@@ -44,7 +44,7 @@ const Page = async () => {
                         variant={'outline'}
                         asChild
                     >
-                        <Link href={''}>出品物一覧</Link>
+                        <Link href={'/mypage/items'}>出品物一覧</Link>
                     </Button>
                 </div>
                 <div>
