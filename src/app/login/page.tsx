@@ -1,5 +1,5 @@
 'use client';
-import { Suspense, useState } from 'react';
+import { Suspense, useState, useTransition } from 'react';
 import { AlertCircle, RotateCw } from 'lucide-react';
 import Link from 'next/link';
 import { Alert, AlertDescription } from '@/components/ui/alert';
@@ -33,24 +33,18 @@ export default function LoginPage({
 const InnerLogin = ({ error }: { error: string }) => {
     const errorparams = error;
 
-    const [loading, setLoading] = useState(false);
+    const [isPending, startTransition] = useTransition();
 
     async function handleLogin(formData: FormData) {
-        setLoading(true);
-        try {
+        startTransition(async () => {
             await login(formData);
-        } finally {
-            setLoading(false);
-        }
+        });
     }
 
     async function handleSignup(formData: FormData) {
-        setLoading(true);
-        try {
+        startTransition(async () => {
             await signup(formData);
-        } finally {
-            setLoading(false);
-        }
+        });
     }
 
     return (
@@ -138,9 +132,9 @@ const InnerLogin = ({ error }: { error: string }) => {
                                     )
                                 }
                                 variant="outline"
-                                disabled={loading}
+                                disabled={isPending}
                             >
-                                {loading ? (
+                                {isPending ? (
                                     <div className="flex items-center space-x-2">
                                         <RotateCw className="animate-spin" />
                                         <div>Loading</div>
@@ -158,9 +152,9 @@ const InnerLogin = ({ error }: { error: string }) => {
                                         )
                                     )
                                 }
-                                disabled={loading}
+                                disabled={isPending}
                             >
-                                {loading ? (
+                                {isPending ? (
                                     <div className="flex items-center space-x-2">
                                         <RotateCw className="animate-spin" />
                                         <div>Loading</div>
