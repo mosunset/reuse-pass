@@ -32,7 +32,6 @@ model Buy {
   userid    String // Buyer id
   itemid    Int      @unique // 一意制約を追加
   item      Items    @relation(fields: [itemid], references: [id])
-  price     Int
   status    String
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
