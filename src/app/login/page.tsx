@@ -2,7 +2,6 @@
 import { Suspense, useState } from 'react';
 import { AlertCircle, RotateCw } from 'lucide-react';
 import Link from 'next/link';
-import { useSearchParams } from 'next/navigation';
 import { Alert, AlertDescription } from '@/components/ui/alert';
 import { Button } from '@/components/ui/button';
 import {
