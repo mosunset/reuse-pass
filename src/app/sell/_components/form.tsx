@@ -41,7 +41,7 @@ const formSchema = z.object({
             (files) =>
                 files.every((file: File) => ['image/*'].includes(file.type)),
             {
-                message: 'jpg/png/webpファイルのみアップロードしてください。',
+                message: '画像ファイルのみアップロードしてください。',
             }
         ),
     place: z
