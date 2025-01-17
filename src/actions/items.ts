@@ -51,3 +51,51 @@ export const GetItemById = async (id: number) => {
         throw new Error(`エラーが発生しました: ${error}`);
     }
 };
+
+export const UpdateItem = async (
+    id: number,
+    data: Omit<Items, 'id' | 'userid' | 'createdAt' | 'updatedAt'>
+) => {
+    try {
+        const item = await db.items.update({
+            where: {
+                id,
+            },
+            data: {
+                ...data,
+            },
+        });
+        return item;
+    } catch (error) {
+        throw new Error(`エラーが発生しました: ${error}`);
+    }
+};
+
+export const SearchItems = async (keyword: string) => {
+    try {
+        const items = await db.items.findMany({
+            where: {
+                OR: [
+                    {
+                        name: {
+                            contains: keyword,
+                        },
+                    },
+                    {
+                        description: {
+                            contains: keyword,
+                        },
+                    },
+                    {
+                        place: {
+                            contains: keyword,
+                        },
+                    },
+                ],
+            },
+        });
+        return items;
+    } catch (error) {
+        throw new Error(`エラーが発生しました: ${error}`);
+    }
+};
