@@ -10,7 +10,7 @@ const nextConfig = {
             // },
             { hostname: 'jmqcdhlciyzcedgedfhi.supabase.co' },
         ],
-        unoptimized: true, // 画像の最適化 trueが無効
+        unoptimized: false, // 画像の最適化 trueが無効
     },
 };
 
