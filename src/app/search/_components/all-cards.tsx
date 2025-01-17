@@ -17,10 +17,11 @@ import {
     CarouselPrevious,
 } from '@/components/ui/carousel';
 
-const GetAll = async () => {
+const AllCards = async () => {
     const data = GetAllItems(3);
     return (
         <div className="grid grid-cols-1 gap-4">
+            all
             {(await data).map((item) => (
                 <Link
                     key={item.id}
@@ -66,4 +67,4 @@ const GetAll = async () => {
     );
 };
 
-export default GetAll;
+export default AllCards;
