@@ -1,6 +1,8 @@
+import { formatDistanceToNow } from 'date-fns';
+import { ja } from 'date-fns/locale/ja';
 import Image from 'next/image';
 import Link from 'next/link';
-import { SearchItems } from '@/actions/items';
+import { SearchItems, GetAllItems } from '@/actions/items';
 import {
     Card,
     CardContent,
@@ -21,11 +23,10 @@ interface SearchCardsProps {
     keyword: string;
 }
 
-const SearchCards = async ({ keyword }: SearchCardsProps) => {
-    const data = SearchItems(keyword);
+const SearchResultCards = async ({ keyword }: SearchCardsProps) => {
+    const data = keyword === '' ? GetAllItems(3) : SearchItems(keyword);
     return (
         <div className="grid grid-cols-1 gap-4">
-            search
             {(await data).map((item) => (
                 <Link
                     key={item.id}
@@ -62,7 +63,12 @@ const SearchCards = async ({ keyword }: SearchCardsProps) => {
                         </CardContent>
                         <CardFooter className="flex flex-col items-start gap-4">
                             <div>{item.place}</div>
-                            <div>{item.createdAt.toISOString()}</div>
+                            <div>
+                                {formatDistanceToNow(new Date(item.updatedAt), {
+                                    addSuffix: true,
+                                    locale: ja,
+                                })}
+                            </div>
                         </CardFooter>
                     </Card>
                 </Link>
@@ -71,4 +77,4 @@ const SearchCards = async ({ keyword }: SearchCardsProps) => {
     );
 };
 
-export default SearchCards;
+export default SearchResultCards;
