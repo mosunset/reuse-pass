@@ -20,6 +20,8 @@ import {
     CarouselNext,
 } from '@/components/ui/carousel';
 import { createClient } from '@/utils/supabase/server';
+import { BuyItem } from './buy-item';
+import BuyButton from './_components/buy-button';
 
 const Page = async (props: { params: { id: string } }) => {
     // ユーザー認証
@@ -107,9 +109,10 @@ const Page = async (props: { params: { id: string } }) => {
                     </Carousel>
                 </div>
                 <div>
-                    <Button disabled={data?.user?.id === item.userid}>
-                        購入
-                    </Button>
+                    <BuyButton
+                        id={data?.user?.id}
+                        item={item}
+                    />
                 </div>
             </div>
         </main>
