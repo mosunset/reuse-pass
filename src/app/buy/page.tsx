@@ -1,7 +1,7 @@
 import React from 'react';
 
 const Page = () => {
-    return <div>Page</div>;
+    return <a href="/buy/4">Page</a>;
 };
 
 export default Page;
