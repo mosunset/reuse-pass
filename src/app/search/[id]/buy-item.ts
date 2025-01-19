@@ -1,5 +1,6 @@
 'use server';
 
+import { redirect } from 'next/navigation';
 import { CreateBuy } from '@/actions/buy';
 
 interface BuyItemProps {
@@ -15,4 +16,6 @@ export const BuyItem = ({ buyerId, itemId }: BuyItemProps) => {
             status: '',
         },
     });
+
+    redirect(`/buy/${itemId}`);
 };

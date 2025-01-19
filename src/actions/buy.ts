@@ -19,3 +19,16 @@ export const CreateBuy = ({ data }: CreateItemProps) => {
         throw new Error(`エラーが発生しました: ${error}`);
     }
 };
+
+export const GetBuyById = async (id: number) => {
+    try {
+        const item = await db.buy.findUnique({
+            where: {
+                itemid: id,
+            },
+        });
+        return item;
+    } catch (error) {
+        throw new Error(`エラーが発生しました: ${error}`);
+    }
+};

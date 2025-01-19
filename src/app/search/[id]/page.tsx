@@ -67,7 +67,7 @@ const Page = async (props: { params: { id: string } }) => {
                     </h1>
                     <p className="text-lg text-gray-600">{item.description}</p>
                     <div className="flex items-center space-x-2 text-sm text-gray-500">
-                        <MapPin className="h-8 w-8" />
+                        <MapPin className="h-4 w-4" />
                         <span>{item.place}</span>
                     </div>
                     <div className="flex items-center space-x-2 text-sm text-gray-500">
