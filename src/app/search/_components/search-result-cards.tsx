@@ -24,7 +24,7 @@ interface SearchCardsProps {
 }
 
 const SearchResultCards = async ({ keyword }: SearchCardsProps) => {
-    const data = keyword === '' ? GetAllItems(3) : SearchItems(keyword);
+    const data = keyword === '' ? GetAllItems(10) : SearchItems(keyword);
     return (
         <div className="grid grid-cols-1 gap-4">
             {(await data).map((item) => (
