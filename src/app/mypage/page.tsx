@@ -52,7 +52,7 @@ const Page = async () => {
                         variant={'outline'}
                         asChild
                     >
-                        <Link href={''}>購入履歴</Link>
+                        <Link href={'/buy'}>購入履歴</Link>
                     </Button>
                 </div>
                 <div>
