@@ -2,6 +2,7 @@
 
 import { revalidatePath } from 'next/cache';
 import { redirect } from 'next/navigation';
+import { db } from '@/lib/db';
 import { createClient } from '@/utils/supabase/server';
 
 export async function login(formData: FormData) {
@@ -29,14 +30,12 @@ export async function login(formData: FormData) {
 export async function signup(formData: FormData) {
     const supabase = await createClient();
 
-    // type-casting here for convenience
-    // in practice, you should validate your inputs
     const data = {
         email: formData.get('email') as string,
         password: formData.get('password') as string,
     };
 
-    const { error } = await supabase.auth.signUp(data);
+    const { data: authData, error } = await supabase.auth.signUp(data);
 
     if (error) {
         if (error.code === 'user_already_exists') {
@@ -55,12 +54,27 @@ export async function signup(formData: FormData) {
                 redirect('/search');
             }
         } else {
-            // その他のエラーの場合、ログインページにリダイレクト
             redirect('/login?error');
         }
-    } else {
-        revalidatePath('/', 'layout');
-        revalidatePath('/search', 'layout');
-        redirect('/search');
     }
+
+    // authData.userからユーザー情報を取得
+    if (authData?.user) {
+        try {
+            await db.user.create({
+                data: {
+                    userid: authData.user.id, // authのユーザーID
+                    name: (formData.get('name') as string) || '無名のユーザ', // デフォルト名
+                    bio: 'よろしくお願いします', // デフォルトの自己紹介
+                    icon: '/KUT_logo.gif', // デフォルトのアイコン
+                },
+            });
+        } catch (userError) {
+            redirect('/login?error=user_table_error');
+        }
+    }
+
+    revalidatePath('/', 'layout');
+    revalidatePath('/search', 'layout');
+    redirect('/search');
 }
