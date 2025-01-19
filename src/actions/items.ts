@@ -28,6 +28,9 @@ export const CreateItem = ({ data }: CreateItemProps) => {
 export const GetAllItems = async (limit: number = 0) => {
     try {
         const items = await db.items.findMany({
+            where: {
+                buy: null, // Buyテーブルに登録されていないアイテムのみ取得
+            },
             orderBy: {
                 createdAt: 'desc',
             },
@@ -92,6 +95,7 @@ export const SearchItems = async (keyword: string) => {
                         },
                     },
                 ],
+                buy: null, // Buyテーブルに登録されていないアイテムのみ取得
             },
             orderBy: {
                 createdAt: 'desc',
