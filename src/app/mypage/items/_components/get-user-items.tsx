@@ -25,7 +25,7 @@ const RenderUserItems = async ({ userid }: { userid: string }) => {
             {data.map((item) => (
                 <Link
                     key={item.id}
-                    href={`/search/${item.id}`}
+                    href={`/mypage/items/${item.id}`}
                 >
                     <Card>
                         <CardHeader>
