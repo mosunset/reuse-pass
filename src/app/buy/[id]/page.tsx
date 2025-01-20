@@ -1,7 +1,7 @@
 import { MapPin, Calendar } from 'lucide-react';
 import Image from 'next/image';
 import { redirect } from 'next/navigation';
-import { GetBuyById } from '@/actions/buy';
+import { GetBuyByitemId } from '@/actions/buy';
 import { GetItemById } from '@/actions/items';
 import { Button } from '@/components/ui/button';
 import {
@@ -22,6 +22,7 @@ import {
     DrawerTrigger,
 } from '@/components/ui/drawer';
 import { createClient } from '@/utils/supabase/server';
+import Chat from '@/components/chat';
 
 // id = itemId
 const Page = async ({ params }: { params: { id: string } }) => {
@@ -34,7 +35,7 @@ const Page = async ({ params }: { params: { id: string } }) => {
 
     // data の人が本当にその商品を買ったのかのチェック
     const buyerId = data.user.id;
-    const buyItem = await GetBuyById(Number(params.id));
+    const buyItem = await GetBuyByitemId(Number(params.id));
 
     if (!buyItem) {
         redirect('/buy');
@@ -52,7 +53,7 @@ const Page = async ({ params }: { params: { id: string } }) => {
 
     return (
         <main className="mx-auto w-full px-4 py-8 pb-[112px]">
-            <h1 className="mb-4 w-full text-center text-2xl">チャット</h1>
+            <h1 className="mb-4 w-full text-center text-2xl">チャット 購入者</h1>
             <Drawer>
                 <DrawerTrigger asChild>
                     <Button>商品詳細を見る</Button>
@@ -108,6 +109,7 @@ const Page = async ({ params }: { params: { id: string } }) => {
                     </div>
                 </DrawerContent>
             </Drawer>
+            <Chat buyId={buyItem?.id} userId={buyerId}/>
         </main>
     );
 };
