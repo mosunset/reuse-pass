@@ -64,8 +64,8 @@ model Message {
   buyId    Int
   buy      Buy    @relation(fields: [buyId], references: [id])
   // 誰が送ったメッセージか (出品者 or 購入者)
-  senderId Int
-  sender   User   @relation(fields: [senderId], references: [id])
+  senderId String
+  sender   User   @relation(fields: [senderId], references: [userid])
   content  String
 
   createdAt DateTime @default(now())
