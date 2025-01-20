@@ -17,6 +17,7 @@ datasource db {
 model Items {
   id          Int      @id @default(autoincrement())
   userid      String // Seller id
+  user        User     @relation(fields: [userid], references: [userid])
   name        String
   description String
   photos      String[]
@@ -30,7 +31,8 @@ model Items {
 model Buy {
   id     Int    @id @default(autoincrement())
   userid String // Buyer id
-  itemid Int    @unique // 一意制約を追加
+  user   User   @relation(fields: [userid], references: [userid])
+  itemid Int    @unique
   item   Items  @relation(fields: [itemid], references: [id])
   status String
 
@@ -48,7 +50,8 @@ model User {
   bio    String? @default("よろしくお願いします") // 自己紹介
   icon   String? @default("/KUT_logo.gif") // アイコン画像
 
-  // 送信したメッセージ一覧
+  items    Items[] // 出品したアイテム一覧
+  buys     Buy[] // 購入したアイテム一覧
   messages Message[]
 
   createdAt DateTime @default(now())
