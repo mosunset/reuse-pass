@@ -28,21 +28,43 @@ model Items {
 }
 
 model Buy {
-  id        Int      @id @default(autoincrement())
-  userid    String // Buyer id
-  itemid    Int      @unique // 一意制約を追加
-  item      Items    @relation(fields: [itemid], references: [id])
-  status    String
+  id     Int    @id @default(autoincrement())
+  userid String // Buyer id
+  itemid Int    @unique // 一意制約を追加
+  item   Items  @relation(fields: [itemid], references: [id])
+  status String
+
+  // 取引に紐づくメッセージ一覧 (1対多: Buy 1件に対し、Message 複数)
+  messages Message[]
+
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 }
 
 model User {
-  id        Int      @id @default(autoincrement())
-  userid    String   @unique // authのidをcreate時に入れる
-  name      String   @default("無名のユーザ") // 表示名
-  bio       String?  @default("よろしくお願いします") // 自己紹介
-  icon      String?  @default("/KUT_logo.gif") // アイコン画像
+  id     Int     @id @default(autoincrement())
+  userid String  @unique // authのidをcreate時に入れる
+  name   String  @default("無名のユーザ") // 表示名
+  bio    String? @default("よろしくお願いします") // 自己紹介
+  icon   String? @default("/KUT_logo.gif") // アイコン画像
+
+  // 送信したメッセージ一覧
+  messages Message[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Message {
+  id       Int    @id @default(autoincrement())
+  // どの取引(Buy)に対するメッセージか
+  buyId    Int
+  buy      Buy    @relation(fields: [buyId], references: [id])
+  // 誰が送ったメッセージか (出品者 or 購入者)
+  senderId Int
+  sender   User   @relation(fields: [senderId], references: [id])
+  content  String
+
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 }
