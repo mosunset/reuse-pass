@@ -33,7 +33,6 @@ export const GetBuyByitemId = async (itemid: number) => {
     }
 };
 
-
 // userid で購入した商品をすべて取得
 export const GetBuyByUserIds = async (userid: string) => {
     try {

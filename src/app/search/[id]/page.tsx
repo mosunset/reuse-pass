@@ -72,7 +72,7 @@ const Page = async (props: { params: { id: string } }) => {
                     </div>
                     <div className="flex items-center space-x-2 text-sm text-gray-500">
                         <Calendar className="h-4 w-4" />
-                        <span>{item.createdAt.toLocaleDateString()}</span>
+                        <span>{item.createdAt.toLocaleString()}</span>
                     </div>
                     {/* <div className="flex items-center space-x-2">
                         <Badge

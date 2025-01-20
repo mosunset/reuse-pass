@@ -3,6 +3,7 @@ import Image from 'next/image';
 import { redirect } from 'next/navigation';
 import { GetBuyByitemId } from '@/actions/buy';
 import { GetItemById } from '@/actions/items';
+import Chat from '@/components/chat';
 import { Button } from '@/components/ui/button';
 import {
     Carousel,
@@ -22,7 +23,6 @@ import {
     DrawerTrigger,
 } from '@/components/ui/drawer';
 import { createClient } from '@/utils/supabase/server';
-import Chat from '@/components/chat';
 
 // id = itemId
 const Page = async ({ params }: { params: { id: string } }) => {
@@ -53,7 +53,9 @@ const Page = async ({ params }: { params: { id: string } }) => {
 
     return (
         <main className="mx-auto w-full px-4 py-8 pb-[112px]">
-            <h1 className="mb-4 w-full text-center text-2xl">チャット 購入者</h1>
+            <h1 className="mb-4 w-full text-center text-2xl">
+                チャット 購入者
+            </h1>
             <Drawer>
                 <DrawerTrigger asChild>
                     <Button>商品詳細を見る</Button>
@@ -73,9 +75,7 @@ const Page = async ({ params }: { params: { id: string } }) => {
                             </div>
                             <div className="flex items-center space-x-2 text-sm text-gray-500">
                                 <Calendar className="h-4 w-4" />
-                                <span>
-                                    {item.createdAt.toLocaleDateString()}
-                                </span>
+                                <span>{item.createdAt.toLocaleString()}</span>
                             </div>
                         </DrawerHeader>
 
@@ -109,7 +109,10 @@ const Page = async ({ params }: { params: { id: string } }) => {
                     </div>
                 </DrawerContent>
             </Drawer>
-            <Chat buyId={buyItem?.id} userId={buyerId}/>
+            <Chat
+                buyId={buyItem?.id}
+                userId={buyerId}
+            />
         </main>
     );
 };

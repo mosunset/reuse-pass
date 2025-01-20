@@ -29,6 +29,9 @@ export const GetMessageBybuyIds = async (buyId: number) => {
             orderBy: {
                 createdAt: 'desc',
             },
+            include: {
+                sender: true, // 関連する sender を含める
+            },
         });
         return message;
     } catch (error) {
