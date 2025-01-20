@@ -20,14 +20,32 @@ export const CreateBuy = ({ data }: CreateItemProps) => {
     }
 };
 
-export const GetBuyById = async (id: number) => {
+export const GetBuyByitemId = async (itemid: number) => {
     try {
         const item = await db.buy.findUnique({
             where: {
-                itemid: id,
+                itemid,
             },
         });
         return item;
+    } catch (error) {
+        throw new Error(`エラーが発生しました: ${error}`);
+    }
+};
+
+
+// userid で購入した商品をすべて取得
+export const GetBuyByUserIds = async (userid: string) => {
+    try {
+        const items = await db.buy.findMany({
+            where: {
+                userid,
+            },
+            include: {
+                item: true, // 関連する Item を含める
+            },
+        });
+        return items;
     } catch (error) {
         throw new Error(`エラーが発生しました: ${error}`);
     }
