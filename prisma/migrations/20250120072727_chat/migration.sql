@@ -1,0 +1,5 @@
+-- AddForeignKey
+ALTER TABLE "Items" ADD CONSTRAINT "Items_userid_fkey" FOREIGN KEY ("userid") REFERENCES "User"("userid") ON DELETE RESTRICT ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "Buy" ADD CONSTRAINT "Buy_userid_fkey" FOREIGN KEY ("userid") REFERENCES "User"("userid") ON DELETE RESTRICT ON UPDATE CASCADE;

@@ -1,6 +1,6 @@
 import Image from 'next/image';
 import Link from 'next/link';
-import { GetUserItems as FetchUserItems } from '@/actions/items'; // 名前を変更してインポート
+import { GetBuyByUserIds } from '@/actions/buy'; // 名前を変更してインポート
 import {
     Card,
     CardContent,
@@ -19,36 +19,36 @@ import {
 
 const RenderUserItems = async ({ userid }: { userid: string }) => {
     // 関数名を変更
-    const data = await FetchUserItems(userid); // 名前を変更して呼び出し
+    const data = await GetBuyByUserIds(userid); // 名前を変更して呼び出し
     return (
         <div className="grid grid-cols-1 gap-4">
             {data.map((item) => (
                 <Link
                     key={item.id}
-                    href={`/mypage/items/${item.id}`}
+                    href={`/buy/${item.id}`}
                 >
                     <Card>
                         <CardHeader>
-                            <CardTitle>{item.name}</CardTitle>
+                            <CardTitle>{item.item.name}</CardTitle>
                             <CardDescription>
-                                {item.description}
+                                {item.item.description}
                             </CardDescription>
                         </CardHeader>
                         <CardContent>
                             <Carousel className="mx-auto w-full max-w-[300px]">
                                 <CarouselContent>
-                                    {item.photos.map((photo, index) => (
+                                    {item.item.photos.map((photo, index) => (
                                         <CarouselItem key={index}>
                                             <Image
                                                 src={photo}
                                                 width={300}
                                                 height={300}
-                                                alt={item.name}
+                                                alt={item.item.name}
                                             />
                                         </CarouselItem>
                                     ))}
                                 </CarouselContent>
-                                {item.photos.length > 1 && (
+                                {item.item.photos.length > 1 && (
                                     <>
                                         <CarouselPrevious />
                                         <CarouselNext />
@@ -57,9 +57,9 @@ const RenderUserItems = async ({ userid }: { userid: string }) => {
                             </Carousel>
                         </CardContent>
                         <CardFooter className="flex flex-col items-start gap-4">
-                            <div>{item.place}</div>
+                            <div>{item.item.place}</div>
                             <div>
-                                {new Date(item.createdAt).toLocaleString()}
+                                {new Date(item.item.createdAt).toLocaleString()}
                             </div>
                         </CardFooter>
                     </Card>

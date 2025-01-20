@@ -33,28 +33,28 @@ const Page = async ({ params }: { params: { id: string } }) => {
         redirect('/login');
     }
 
-    // data の人が本当にその商品を買ったのかのチェック
-    const buyerId = data.user.id;
-    const buyItem = await GetBuyByitemId(Number(params.id));
-
-    if (!buyItem) {
-        redirect('/buy');
-    }
-
-    if (buyItem?.userid !== buyerId) {
-        redirect('/buy');
-    }
-
-    const item = await GetItemById(Number(buyItem?.itemid));
+    // data の人が本当にその商品を売ったのかのチェック
+    const sellerid = data.user.id;
+    const item = await GetItemById(Number(params.id));
 
     if (!item) {
-        redirect('/buy');
+        redirect('/mypage/items');
+    }
+
+    if (item?.userid !== sellerid) {
+        redirect('/mypage/items');
+    }
+
+    // 購入されていなかったらSearchページに飛ばす
+    const buy = await GetBuyByitemId(Number(params.id));
+    if (buy === null) {
+        redirect(`/search/${params.id}`);
     }
 
     return (
         <main className="mx-auto w-full px-4 py-8 pb-[112px]">
             <h1 className="mb-4 w-full text-center text-2xl">
-                チャット 購入者
+                チャット 出品者
             </h1>
             <Drawer>
                 <DrawerTrigger asChild>
@@ -110,8 +110,8 @@ const Page = async ({ params }: { params: { id: string } }) => {
                 </DrawerContent>
             </Drawer>
             <Chat
-                buyId={buyItem?.id}
-                userId={buyerId}
+                buyId={buy.id}
+                userId={sellerid}
             />
         </main>
     );
