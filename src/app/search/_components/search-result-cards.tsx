@@ -19,6 +19,8 @@ import {
     CarouselPrevious,
 } from '@/components/ui/carousel';
 
+import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
+
 interface SearchCardsProps {
     keyword: string;
 }
@@ -69,6 +71,21 @@ const SearchResultCards = async ({ keyword }: SearchCardsProps) => {
                                     locale: ja,
                                 })}
                             </div>
+                            <Link
+                                className="flex items-center gap-2"
+                                href={`/user/${item.user.userid}`}
+                            >
+                                <Avatar>
+                                    <AvatarImage
+                                        src={item.user.icon ?? undefined}
+                                        alt={item.user.name}
+                                    />
+                                    <AvatarFallback>
+                                        {item.user.name?.slice(0, 2)}
+                                    </AvatarFallback>
+                                </Avatar>
+                                <div>{item.user.name}</div>
+                            </Link>
                         </CardFooter>
                     </Card>
                 </Link>

@@ -31,6 +31,9 @@ export const GetAllItems = async (limit: number = 0) => {
             where: {
                 buy: null, // Buyテーブルに登録されていないアイテムのみ取得
             },
+            include: {
+                user: true,
+            },
             orderBy: {
                 createdAt: 'desc',
             },
@@ -47,6 +50,9 @@ export const GetItemById = async (id: number) => {
         const item = await db.items.findUnique({
             where: {
                 id,
+            },
+            include: {
+                user: true,
             },
         });
         return item;
@@ -96,6 +102,9 @@ export const SearchItems = async (keyword: string) => {
                     },
                 ],
                 buy: null, // Buyテーブルに登録されていないアイテムのみ取得
+            },
+            include: {
+                user: true,
             },
             orderBy: {
                 createdAt: 'desc',
