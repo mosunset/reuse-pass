@@ -20,7 +20,7 @@ const Page = async () => {
     return (
         <main className="p-4 pb-[112px]">
             <h1 className="mb-4 w-full text-center text-2xl">My Page</h1>
-            <div className="flex items-center space-x-4">
+            <div className="flex items-center justify-center space-x-4">
                 <Avatar>
                     <AvatarImage
                         src={user?.icon ?? undefined}
@@ -33,7 +33,7 @@ const Page = async () => {
                     <div>{data.user.email}</div>
                 </div>
             </div>
-            <div className="[&>div]:my-6">
+            <div className="flex flex-col items-center justify-center [&>div]:my-6">
                 <div>
                     <Button
                         variant={'outline'}
@@ -64,7 +64,10 @@ const Page = async () => {
                     </Button>
                 </div>
                 <div>
-                    <PremiumDialog className="min-w-[150px] text-center" />
+                    <PremiumDialog
+                        id={data.user.id}
+                        className="min-w-[150px] text-center"
+                    />
                 </div>
                 <div>
                     <SignOutButton className="min-w-[150px] text-center" />
