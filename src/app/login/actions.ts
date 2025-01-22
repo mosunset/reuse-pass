@@ -69,7 +69,7 @@ export async function signup(formData: FormData) {
                     icon: '/KUT_logo.gif', // デフォルトのアイコン
                 },
             });
-        } catch (userError) {
+        } catch {
             redirect('/login?error=user_table_error');
         }
     }
