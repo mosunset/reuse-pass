@@ -35,13 +35,27 @@ export async function updateSession(request: NextRequest) {
 
     // IMPORTANT: DO NOT REMOVE auth.getUser()
 
-    // ユーザーエージェントを取得し、小文字に変換。取得できない場合は空文字を設定
+    const errorvalue = 'unsupported_browser';
     const userAgent = request.headers.get('user-agent')?.toLowerCase() || '';
 
-    // ブラウザがChrome以外で、パスが '/' かつ 'error' パラメータが 'unsupported_browser' でない場合にリダイレクト
-    const errorvalue = 'unsupported_browser';
+    let browser = '';
+
+    if (userAgent.includes('msie') || userAgent.includes('trident/')) {
+        browser = 'IE';
+    } else if (userAgent.includes('edg/') || userAgent.includes('edge')) {
+        browser = 'Edge';
+    } else if (userAgent.includes('chrome')) {
+        browser = 'Chrome';
+    } else if (userAgent.includes('safari') && !userAgent.includes('chrome')) {
+        browser = 'Safari';
+    } else if (userAgent.includes('firefox')) {
+        browser = 'Firefox';
+    } else {
+        browser = 'その他のブラウザです';
+    }
+
     if (
-        !userAgent.includes('chrome') &&
+        browser !== 'Chrome' &&
         (request.nextUrl.pathname === '/' ||
             request.nextUrl.pathname.startsWith('/login')) &&
         request.nextUrl.searchParams.get('error') !== errorvalue
