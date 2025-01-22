@@ -4,6 +4,7 @@ import { GetUserByUserId } from '@/actions/users';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { Button } from '@/components/ui/button';
 import { createClient } from '@/utils/supabase/server';
+import PremiumDialog from './_components/premium-dialog';
 import SignOutButton from './_components/sign-out-button';
 
 const Page = async () => {
@@ -32,10 +33,11 @@ const Page = async () => {
                     <div>{data.user.email}</div>
                 </div>
             </div>
-            <div className="[&>div]:my-4">
+            <div className="[&>div]:my-6">
                 <div>
                     <Button
                         variant={'outline'}
+                        className="min-w-[150px] text-center"
                         asChild
                     >
                         <Link href={'/mypage/change-profile'}>
@@ -46,6 +48,7 @@ const Page = async () => {
                 <div>
                     <Button
                         variant={'outline'}
+                        className="min-w-[150px] text-center"
                         asChild
                     >
                         <Link href={'/mypage/items'}>出品物一覧</Link>
@@ -54,21 +57,17 @@ const Page = async () => {
                 <div>
                     <Button
                         variant={'outline'}
+                        className="min-w-[150px] text-center"
                         asChild
                     >
                         <Link href={'/buy'}>購入履歴</Link>
                     </Button>
                 </div>
                 <div>
-                    <Button
-                        variant={'outline'}
-                        asChild
-                    >
-                        <Link href={''}>プレミアム課金</Link>
-                    </Button>
+                    <PremiumDialog className="min-w-[150px] text-center" />
                 </div>
                 <div>
-                    <SignOutButton />
+                    <SignOutButton className="min-w-[150px] text-center" />
                 </div>
             </div>
         </main>
