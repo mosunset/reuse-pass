@@ -65,3 +65,25 @@ export const GetUserByUserId = async (userid: string) => {
         throw new Error(`ユーザー情報を取得できませんでした: ${error}`);
     }
 };
+
+export const updatePremium = async ({
+    userid,
+    premium,
+}: {
+    userid: string;
+    premium: boolean;
+}) => {
+    try {
+        const user = await db.user.update({
+            where: {
+                userid,
+            },
+            data: {
+                premium,
+            },
+        });
+        return user;
+    } catch (error) {
+        throw new Error(`ユーザー情報の更新中にエラーが発生しました: ${error}`);
+    }
+};
