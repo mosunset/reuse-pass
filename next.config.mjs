@@ -8,7 +8,7 @@ const nextConfig = {
             // {
             //     hostname: 'placehold.jp',
             // },
-            { hostname: 'jmqcdhlciyzcedgedfhi.supabase.co' },
+            { hostname: 'jrmknvqsycklrpwfckji.supabase.co' },
         ],
         unoptimized: false, // 画像の最適化 trueが無効
     },
