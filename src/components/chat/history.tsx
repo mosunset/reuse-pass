@@ -41,10 +41,10 @@ export const History = async ({ buyId, userId }: ChatProps) => {
                         />
                     )
                 )}
-                <RealTileMessage
+                {/* <RealTileMessage
                     buyId={buyId}
                     userId={userId}
-                />
+                /> */}
             </div>
         </div>
     );

@@ -9,9 +9,6 @@ interface ChatProps {
 const Index = ({ buyId, userId }: ChatProps) => {
     return (
         <div className="py-4">
-            {buyId}
-            <br />
-            {userId}
             <div>
                 <Send
                     buyId={buyId}
