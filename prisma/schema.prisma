@@ -49,6 +49,7 @@ model User {
   name   String  @default("無名のユーザ") // 表示名
   bio    String? @default("よろしくお願いします") // 自己紹介
   icon   String? @default("/KUT_logo.gif") // アイコン画像
+  premium Boolean @default(false) // プレミアム会員かどうか
 
   items    Items[] // 出品したアイテム一覧
   buys     Buy[] // 購入したアイテム一覧
