@@ -1,7 +1,8 @@
+import React from 'react';
 import { redirect } from 'next/navigation';
 import { GetUserByUserId } from '@/actions/users';
 import { createClient } from '@/utils/supabase/server';
-import ChangeProfile from './_components/change-profile';
+import ChangeProfileForm from './_components/change-profile-form';
 
 const Page = async () => {
     const supabase = await createClient();
@@ -17,13 +18,11 @@ const Page = async () => {
             <h1 className="mb-4 w-full text-center text-2xl">
                 プロフィール変更
             </h1>
-            <div>
-                <ChangeProfile
-                    id={data?.user.id}
-                    name={user?.name || ''}
-                    bio={user?.bio || ''}
-                />
-            </div>
+            <ChangeProfileForm
+                id={data?.user.id}
+                name={user?.name || ''}
+                bio={user?.bio || ''}
+            />
         </main>
     );
 };
