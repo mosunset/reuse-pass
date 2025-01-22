@@ -1,5 +1,6 @@
 import Link from 'next/link';
 import { redirect } from 'next/navigation';
+import { GetUserByUserId } from '@/actions/users';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { Button } from '@/components/ui/button';
 import { createClient } from '@/utils/supabase/server';
@@ -13,20 +14,23 @@ const Page = async () => {
         redirect('/login');
     }
 
+    const user = await GetUserByUserId(data?.user.id);
+
     return (
         <main className="p-4 pb-[112px]">
             <h1 className="mb-4 w-full text-center text-2xl">My Page</h1>
             <div className="flex items-center space-x-4">
                 <Avatar>
                     <AvatarImage
-                        src=""
-                        alt={data.user.email}
+                        src={user?.icon ?? undefined}
+                        alt={user?.name}
                     />
-                    <AvatarFallback>
-                        {data.user.email?.slice(0, 2)}
-                    </AvatarFallback>
+                    <AvatarFallback>{user?.name.slice(0, 2)}</AvatarFallback>
                 </Avatar>
-                <div>{data.user.email}</div>
+                <div className="mx-auto flex flex-col">
+                    <div>{user?.name}</div>
+                    <div>{data.user.email}</div>
+                </div>
             </div>
             <div className="[&>div]:my-4">
                 <div>
