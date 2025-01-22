@@ -12,10 +12,8 @@ const Footer = async () => {
     const supabase = await createClient();
 
     const { data, error } = await supabase.auth.getUser();
-    if (error || !data?.user) {
-        redirect('/login');
-    }
-    const user = await GetUserByUserId(data.user.id);
+ 
+    const user = data?.user ? await GetUserByUserId(data.user.id) : null;
     return (
         <>
             {!user?.premium && (
