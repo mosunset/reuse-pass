@@ -9,6 +9,7 @@ const SignOutButton: React.FC<SignOutButtonProps> = ({ className }) => {
     return (
         <Button
             className={className}
+            variant="destructive"
             asChild
         >
             <Link href="/sign-out">Sign Out</Link>
