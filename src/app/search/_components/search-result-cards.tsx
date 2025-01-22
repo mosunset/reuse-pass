@@ -3,6 +3,7 @@ import { ja } from 'date-fns/locale/ja';
 import Image from 'next/image';
 import Link from 'next/link';
 import { SearchItems, GetAllItems } from '@/actions/items';
+import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import {
     Card,
     CardContent,
@@ -19,7 +20,6 @@ import {
     CarouselPrevious,
 } from '@/components/ui/carousel';
 
-import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 
 interface SearchCardsProps {
     keyword: string;
@@ -73,7 +73,7 @@ const SearchResultCards = async ({ keyword }: SearchCardsProps) => {
                             </div>
                             <Link
                                 className="flex items-center gap-2"
-                                href={`/user/${item.user.userid}`}
+                                href={`/user/${item.userid}`}
                             >
                                 <Avatar>
                                     <AvatarImage
