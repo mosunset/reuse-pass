@@ -38,19 +38,16 @@ const Page = async ({ params }: { params: { id: string } }) => {
     const buyItem = await GetBuyByitemId(Number(params.id));
 
     if (!buyItem) {
-        console.log('🚀 => file: page.tsx:41 => Page => buyItem:', buyItem);
         redirect('/buy');
     }
 
     if (buyItem?.userid !== buyerId) {
-        console.log('🚀 => file: page.tsx:45 => Page => buyerId:', buyerId);
         redirect('/buy');
     }
 
     const item = await GetItemById(Number(buyItem?.itemid));
 
     if (!item) {
-        console.log('🚀 => file: page.tsx:52 => Page => item:', item);
         redirect('/buy');
     }
 
