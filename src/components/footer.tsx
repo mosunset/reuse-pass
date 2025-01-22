@@ -1,6 +1,5 @@
 import React from 'react';
 import Link from 'next/link';
-import { redirect } from 'next/navigation';
 import { GetUserByUserId } from '@/actions/users';
 import HeroiconsSolidCamera from '@/icons/HeroiconsSolidCamera';
 import HeroiconsSolidHome from '@/icons/HeroiconsSolidHome';
@@ -11,8 +10,8 @@ import Ad from './ad';
 const Footer = async () => {
     const supabase = await createClient();
 
-    const { data, error } = await supabase.auth.getUser();
- 
+    const { data } = await supabase.auth.getUser();
+
     const user = data?.user ? await GetUserByUserId(data.user.id) : null;
     return (
         <>
