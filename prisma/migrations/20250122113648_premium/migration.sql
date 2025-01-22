@@ -31,6 +31,7 @@ CREATE TABLE "User" (
     "name" TEXT NOT NULL DEFAULT '無名のユーザ',
     "bio" TEXT DEFAULT 'よろしくお願いします',
     "icon" TEXT DEFAULT '/KUT_logo.gif',
+    "premium" BOOLEAN NOT NULL DEFAULT false,
     "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "updatedAt" TIMESTAMP(3) NOT NULL,
 
