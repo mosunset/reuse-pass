@@ -31,8 +31,9 @@ const Page = async ({ params }: { params: { id: string } }) => {
                 </Avatar>
                 {user?.name} さん
             </h1>
+            <h2 className="my-6">{user?.bio}</h2>
             <div className="mb-4 w-full text-center text-2xl">出品物一覧</div>
-            <GetUserItems userid={data.user.id} />
+            {user?.userid && <GetUserItems userid={user.userid} />}
         </main>
     );
 };

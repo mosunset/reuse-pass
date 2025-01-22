@@ -1,6 +1,7 @@
 import Image from 'next/image';
 import Link from 'next/link';
 import { GetBuyByUserIds } from '@/actions/buy'; // 名前を変更してインポート
+import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import {
     Card,
     CardContent,
@@ -20,6 +21,7 @@ import {
 const RenderUserItems = async ({ userid }: { userid: string }) => {
     // 関数名を変更
     const data = await GetBuyByUserIds(userid); // 名前を変更して呼び出し
+
     return (
         <div className="grid grid-cols-1 gap-4">
             {data.map((item) => (
@@ -61,6 +63,21 @@ const RenderUserItems = async ({ userid }: { userid: string }) => {
                             <div>
                                 {new Date(item.item.createdAt).toLocaleString()}
                             </div>
+                            <Link
+                                className="flex items-center gap-2"
+                                href={`/user/${item.item.user.userid}`}
+                            >
+                                <Avatar>
+                                    <AvatarImage
+                                        src={item.item.user.icon ?? undefined}
+                                        alt={item.item.user.name}
+                                    />
+                                    <AvatarFallback>
+                                        {item.item.user.name?.slice(0, 2)}
+                                    </AvatarFallback>
+                                </Avatar>
+                                <div>{item.item.user.name}</div>
+                            </Link>
                         </CardFooter>
                     </Card>
                 </Link>

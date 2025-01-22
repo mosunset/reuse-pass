@@ -41,7 +41,11 @@ export const GetBuyByUserIds = async (userid: string) => {
                 userid,
             },
             include: {
-                item: true, // 関連する Item を含める
+                item: {
+                    include: {
+                        user: true, // User を含める
+                    },
+                },
             },
         });
         return items;
