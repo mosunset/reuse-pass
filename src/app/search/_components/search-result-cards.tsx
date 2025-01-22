@@ -20,7 +20,6 @@ import {
     CarouselPrevious,
 } from '@/components/ui/carousel';
 
-
 interface SearchCardsProps {
     keyword: string;
 }
